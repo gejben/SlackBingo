@@ -1,0 +1,11 @@
+<!-- <ul class="options">
+    <li *ngFor="let option of options">
+        <span class="card">{{option}}</span>
+    </li>
+</ul> -->
+<mat-grid-list cols="4" rowHeight="150px" rowWidth="150px">
+    <mat-grid-tile *ngFor="let option of options">
+        {{option}}
+    </mat-grid-tile>
+</mat-grid-list>
+  
