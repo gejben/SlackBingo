@@ -7,5 +7,6 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+  //testing slack connection
   title = 'SlackBingo';
 }
