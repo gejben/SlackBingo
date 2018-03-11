@@ -4,8 +4,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list'
 
 import { AppComponent } from './app.component';
-import { OptionsService } from './options.service';
+import { OptionsProvider } from './providers/optionsProvider';
 import { OptionsComponent } from './options/options.component';
+import { environment } from '../environments/environment';
+
+export const firebaseConfig = environment.firebaseConfig;
+import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/database'
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 
 @NgModule({
@@ -16,9 +22,12 @@ import { OptionsComponent } from './options/options.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatGridListModule
+    MatGridListModule,
+    AngularFireModule.initializeApp(firebaseConfig),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
   ],
-  providers: [OptionsService],
+  providers: [AngularFireDatabase,OptionsProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

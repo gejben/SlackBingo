@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+interface boxContent{
+  content: string;
+  id?: any;
+}
 
 @Component({
   selector: 'app-root',
@@ -6,6 +10,9 @@ import { Component } from '@angular/core';
   styles: []
 })
 
-export class AppComponent {
+export class AppComponent{
+
   title = 'SlackBingo';
+
+  constructor(){}
 }
