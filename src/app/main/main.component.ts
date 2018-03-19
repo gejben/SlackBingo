@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProvider } from '../providers/userProvider';
 import { OptionsProvider } from '../providers/optionsProvider';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {NewUserComponent} from '../main/NewUser/newUser.component'
+import { empty } from 'rxjs/Observer';
 
 @Component({
   templateUrl: `main.component.html`,
@@ -8,21 +11,31 @@ import { OptionsProvider } from '../providers/optionsProvider';
 })
 export class MainComponent implements OnInit {
   username;
-  users;
-
-  constructor(private optionsProvider: OptionsProvider, private userProvider: UserProvider) {
-
-  }
+  userList;
+  selectedUser:string;
+  userCount: number;
+  constructor(private optionsProvider: OptionsProvider, private userProvider: UserProvider, public dialog: MatDialog) {}
 
   createNewUser() {
-    this.userProvider.createNewUser(this.username);
+    let dialogRef =this.dialog.open(NewUserComponent, {
+      height: '400px',
+      width: '600px',
+      data:{userNumber:this.userCount}
+    });
+  }
+
+  login(){
+    this.userProvider.login(this.selectedUser);
   }
 
   ngOnInit() {
-    if(!this.userProvider.currentUser)
-    {
-      var kuken =  this.userProvider.getUsers();
+      this.userProvider.getUserList()
+      .subscribe( x=> {
+        this.userList = x;
+        if(this.userList instanceof Array)
+        {
+            this.userCount = this.userList.length;
+        }
+      })
     }
-  }
-
 }

@@ -27,6 +27,8 @@ import {AngularFireDatabaseModule, AngularFireDatabase} from 'angularfire2/datab
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { UserProvider } from './providers/userProvider';
+import { MatDialog, MatDialogModule } from '@angular/material';
+import { NewUserComponent } from './main/NewUser/newUser.component';
 
 
 @NgModule({
@@ -34,8 +36,10 @@ import { UserProvider } from './providers/userProvider';
     AppComponent,
     OptionsComponent,
     MainComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    NewUserComponent
   ],
+  entryComponents: [NewUserComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -52,6 +56,7 @@ import { UserProvider } from './providers/userProvider';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatDialogModule,
     FormsModule
   ],
   providers: [AngularFireDatabase,OptionsProvider,UserProvider],

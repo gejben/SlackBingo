@@ -22,7 +22,7 @@ export class UserProvider {
         })
     }
 
-    createNewUser(username: string) {
+    createNewUser(username: string, usernum:number) {
         var email = username+"@anr.se";
         this.dbAuth.auth.createUserWithEmailAndPassword(email, this.myHardcodedPassword).then((x) => {
             var userId = x.uid;
@@ -33,12 +33,24 @@ export class UserProvider {
             this.db.object(`users/${userId}`).set(newUser).then(p => {
                 this.dbAuth.auth.signInWithEmailAndPassword(username, this.myHardcodedPassword);
             })
+            this.db.object(`Userlist/${usernum}`).set(username)
         })
     }
 
-    getUsers()
+    login(username:string)
     {
-        return this.db.object(`users/`).valueChanges();
+        var email = username+"@anr.se";
+        this.dbAuth.auth.signInWithEmailAndPassword(email, this.myHardcodedPassword);
+    }
+
+    logout()
+    {
+        this.dbAuth.auth.signOut();
+    }
+
+    getUserList()
+    {
+        return this.db.object(`Userlist/`).valueChanges();
     }
     
 

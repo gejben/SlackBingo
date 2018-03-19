@@ -1,8 +1,19 @@
 <div class="example-form">
-    <mat-form-field class="example-full-width">
-        <input matInput placeholder="användarnamn" [(ngModel)]="username">
-    </mat-form-field>
-
+    <br>
+        <mat-select placeholder="Användare" [(ngModel)]="selectedUser">
+            <mat-option *ngFor="let user of userList" [value]="user">
+                {{user}}
+            </mat-option>
+        </mat-select>
+    <br>
+    <br>
+    <br>
+</div>
+<div>
+    <button (click)="login()" mat-raised-button color="primary">
+        Logga in {{selectedUser}}
+    </button>
+    
     <button (click)="createNewUser()" mat-raised-button color="primary">
         Skapa ny användare
     </button>
